@@ -1,4 +1,5 @@
 <form class="example-form">
+    <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
     <table class="example-full-width" cellspacing="0">
     <tr>
       <td>
@@ -20,7 +21,7 @@
             <input matInput type="number" max="8849" min="1">
       </mat-form-field>
       </td>
-      <td>
+      <td class="last-td">
       <mat-form-field
         class="example-full-width"
         appearance="fill">
@@ -54,14 +55,14 @@
               <textarea matInput placeholder="Ex. The Sudetes"></textarea>
         </mat-form-field>
         </td>
-        <td>
+        <td class="last-td">
             <mat-form-field
               class="example-full-width"
               appearance="fill">
                   <mat-label>National Park</mat-label>
                   <textarea matInput placeholder="Ex. Tatry National Park"></textarea>
             </mat-form-field>
-            </td>
+        </td>
     </tr>
     <mat-label>Mountain Shelter</mat-label>
     <tr>
@@ -81,7 +82,7 @@
               <input matInput>
         </mat-form-field>
         </td>
-        <td>
+        <td  class="last-td">
             <mat-form-field
               class="example-full-width"
               appearance="fill">
@@ -95,7 +96,7 @@
                     <mat-option value="five">Delicious</mat-option>
                 </mat-select>
             </mat-form-field>
-            </td>
+        </td>
     </tr>
     <tr>
         <td>
@@ -108,8 +109,11 @@
                 <mat-checkbox>Mountain Lift Available</mat-checkbox>
             </section>
         </td>
-        <td>
-            <mat-label>Hiking trails to mountain top</mat-label> <br>
+        <td  class="last-td">
+            <mat-label>
+                Hiking trails to mountain top:
+                <!-- <b>{{ }}</b> TODO: var number -->
+            </mat-label><br>
             <mat-slider min="1" max="10" step="1"
                 thumbLabel
                 [tickInterval]="1"

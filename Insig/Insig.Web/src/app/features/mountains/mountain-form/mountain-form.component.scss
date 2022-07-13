@@ -1,5 +1,5 @@
 .example-form {
-    min-width: 150px;
+    min-width: 400px;
     max-width: 900px;
     width: 100%;
     margin: 30px auto 0 auto;
@@ -13,6 +13,14 @@
     padding-right: 8px;
   }
 
+  .last-td {
+    padding-right: 0px;
+  }
+
   mat-slider {
     width: 100%;
+  }
+
+  mat-progress-bar {
+    margin-bottom: 15px;
   }
