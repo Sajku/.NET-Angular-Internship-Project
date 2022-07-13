@@ -6,13 +6,15 @@
 
         <span class="fill-remaining-space"></span>
 
-        <button mat-raised-button>
-            <mat-icon>add</mat-icon>Add a mountain
+        <button mat-raised-button
+            color="{{ showAddForm ? 'accent' : 'primary' }}"
+            (click)="toggleAddFormVisibility()">
+            <mat-icon>{{ btnIcon }}</mat-icon>{{ btnText}}
         </button>
 
     </mat-toolbar>
 
-    <mat-card>
+    <mat-card *ngIf="showAddForm">
         <app-mountain-form></app-mountain-form>
     </mat-card>
 
