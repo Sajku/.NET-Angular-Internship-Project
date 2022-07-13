@@ -6,6 +6,7 @@ import { LoginModule } from './account/login/login.module';
 import { LogoutModule } from './account/logout/logout.module';
 import { RegisterModule } from './account/register/register.module';
 import { FeaturesRoutingModule } from './features-routing.module';
+import { MountainsRoutingModule } from './mountains/mountains-routing.module';
 import { MountainsModule } from './mountains/mountains.module';
 
 import { SampleComponent } from './sample/sample.component';
@@ -18,7 +19,8 @@ import { SampleComponent } from './sample/sample.component';
         LoginModule,
         RegisterModule,
         LogoutModule,
-        MountainsModule
+        MountainsModule,
+        MountainsRoutingModule
     ],
     declarations: [
         SampleComponent

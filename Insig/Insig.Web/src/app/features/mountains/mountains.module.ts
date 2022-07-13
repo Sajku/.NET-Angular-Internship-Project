@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MaterialModule } from '@app/material.module';
+
 import { MountainsComponent } from './mountains.component';
 
 @NgModule({
@@ -7,7 +9,8 @@ import { MountainsComponent } from './mountains.component';
         MountainsComponent
     ],
     imports: [
-        CommonModule
+        CommonModule,
+        MaterialModule
     ]
 })
 export class MountainsModule { }

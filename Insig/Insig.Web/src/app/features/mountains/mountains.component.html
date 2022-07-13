@@ -1,1 +1,24 @@
-<p>mountains component works!</p>
+<mat-card>
+
+    <mat-toolbar>
+
+        <h1> {{ title }} </h1>
+
+        <span class="fill-remaining-space"></span>
+
+        <button mat-raised-button>
+            <mat-icon>add</mat-icon>Add sample
+        </button>
+
+    </mat-toolbar>
+
+
+    <mat-form-field class="example-full-width">
+        <input matInput #sampleInput placeholder="Sample value">
+    </mat-form-field>
+
+    <!-- <ul>
+        <li>
+        </li>
+    </ul> -->
+</mat-card>
