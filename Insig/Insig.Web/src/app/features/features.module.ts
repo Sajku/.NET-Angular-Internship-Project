@@ -6,6 +6,8 @@ import { LoginModule } from './account/login/login.module';
 import { LogoutModule } from './account/logout/logout.module';
 import { RegisterModule } from './account/register/register.module';
 import { FeaturesRoutingModule } from './features-routing.module';
+import { MountainsModule } from './mountains/mountains.module';
+
 import { SampleComponent } from './sample/sample.component';
 
 @NgModule({
@@ -15,7 +17,8 @@ import { SampleComponent } from './sample/sample.component';
         MaterialModule,
         LoginModule,
         RegisterModule,
-        LogoutModule
+        LogoutModule,
+        MountainsModule
     ],
     declarations: [
         SampleComponent
