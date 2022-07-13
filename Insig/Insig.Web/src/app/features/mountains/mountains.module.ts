@@ -6,6 +6,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table'
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MountainsRoutingModule } from './mountains-routing.module';
 
 import { MountainsComponent } from './mountains.component';
@@ -26,6 +27,7 @@ import { MountainsListComponent } from './mountains-list/mountains-list.componen
         MatSliderModule,
         MatProgressBarModule,
         MatTableModule,
+        MatPaginatorModule,
         MountainsRoutingModule
     ]
 })
