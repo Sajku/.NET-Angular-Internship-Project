@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ViewChild, Output, EventEmitter} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 
@@ -11,6 +11,8 @@ import {MatTableDataSource} from '@angular/material/table';
   styleUrls: ['./mountains-list.component.scss']
 })
 export class MountainsListComponent implements AfterViewInit {
+    @Output() elementChosen = new EventEmitter();
+
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
@@ -19,6 +21,11 @@ export class MountainsListComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
+
+  rowClick(): void {
+    this.elementChosen.emit();
+  }
+
 }
 
 export interface PeriodicElement {

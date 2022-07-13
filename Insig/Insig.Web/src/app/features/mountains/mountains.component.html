@@ -18,6 +18,10 @@
         <app-mountain-form></app-mountain-form>
     </mat-card>
 
-    <app-mountains-list></app-mountains-list>
+    <app-mountains-list (elementChosen)="makeEditFormVisible()"></app-mountains-list>
+
+    <mat-card *ngIf="showEditForm">
+        <app-mountain-form></app-mountain-form>
+    </mat-card>
 
 </mat-card>

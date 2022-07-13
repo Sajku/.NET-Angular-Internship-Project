@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MountainsComponent implements OnInit {
     title = "Moutains Collection";
-    showAddForm: boolean = false
+    showAddForm: boolean = false;
+    showEditForm: boolean = false;
     btnText: string = "Add a mountain";
     btnIcon: string = "add";
 
@@ -24,6 +25,9 @@ export class MountainsComponent implements OnInit {
             this.btnText = "Add a mountain"
             this.btnIcon = "add"
         }
+    }
 
+    makeEditFormVisible(): void {
+        this.showEditForm = true;
     }
 }
