@@ -1,6 +1,6 @@
 .example-form {
     min-width: 150px;
-    max-width: 700px;
+    max-width: 900px;
     width: 100%;
     margin: 30px auto 0 auto;
   }
@@ -11,4 +11,8 @@
 
   td {
     padding-right: 8px;
+  }
+
+  mat-slider {
+    width: 100%;
   }

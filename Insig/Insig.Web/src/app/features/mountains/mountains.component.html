@@ -7,15 +7,25 @@
         <span class="fill-remaining-space"></span>
 
         <button mat-raised-button>
-            <mat-icon>add</mat-icon>Add sample
+            <mat-icon>add</mat-icon>Add mountain
         </button>
 
     </mat-toolbar>
 
+    <!--
+        -Name
+        -Height
+        -Location: Country, Mountain Range, National Park
+        -Distance from mountain shelter to mountain peak
+        -Nearest mountain shelter
+        -Food Quality in shelter
+        -Difficulty
+        Only snow conditions
+        Mountain lift available
+        Number of hiking trails
+     -->
 
-    <mat-form-field class="example-full-width">
-        <input matInput #sampleInput placeholder="Sample value">
-    </mat-form-field>
+    <app-mountain-form></app-mountain-form>
 
     <!-- <ul>
         <li>
