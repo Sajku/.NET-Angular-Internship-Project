@@ -42,5 +42,21 @@ namespace Insig.Api.Controllers
             await _commandDispatcher.Dispatch(command);
             return Ok();
         }
+
+        [Authorize(Policies.Consumer)]
+        [HttpGet("mountains")]
+        public async Task<IActionResult> GetMountains([FromQuery] MountainParameter parameter)
+        {
+            List<MountainDTO> result = await _queryDispatcher.Dispatch(parameter);
+            return Ok(result);
+        }
+
+        [Authorize(Policies.Consumer)]
+        [HttpPost("mountains")]
+        public async Task<IActionResult> AddMountains([FromBody] AddMountainCommand command)
+        {
+            await _commandDispatcher.Dispatch(command);
+            return Ok();
+        }
     }
 }

@@ -23,10 +23,12 @@ namespace Insig.Infrastructure.DataModel.Context
         }
 
         public DbSet<Sample> Samples { get; set; }
+        public DbSet<Mountain> Mountains { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new SampleConfiguration());
+            builder.ApplyConfiguration(new MountainConfiguration());
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
