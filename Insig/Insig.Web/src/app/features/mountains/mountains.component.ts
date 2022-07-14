@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./mountains.component.scss'],
 })
 export class MountainsComponent implements OnInit {
-    title = "Moutains Collection";
+    title = "Mountains Collection";
     showForm: boolean = false;
     btnText: string = "Add a new mountain";
     btnIcon: string = "add";
