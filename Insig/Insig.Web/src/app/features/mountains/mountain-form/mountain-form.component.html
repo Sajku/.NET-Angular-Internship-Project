@@ -121,7 +121,15 @@
         </td>
     </tr>
     </table>
-    <button mat-raised-button class="btn" color="primary">
-        <mat-icon>add</mat-icon>Add new mountain do database
+
+    <section class="example-section" *ngIf="editModeOn">
+        <mat-checkbox>Is Deleted</mat-checkbox>
+    </section>
+
+    <button mat-raised-button class="btn"
+            color="{{ editModeOn ? 'accent' : 'primary' }}"
+            (click)="btnClick()">
+        <mat-icon>{{ editModeOn ? 'edit' : 'add' }}</mat-icon>
+        {{ editModeOn ? 'Edit this mountain!' : 'Add new mountain in database' }}
     </button>
   </form>

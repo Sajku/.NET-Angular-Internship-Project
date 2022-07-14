@@ -7,27 +7,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MountainsComponent implements OnInit {
     title = "Moutains Collection";
-    showAddForm: boolean = false;
-    showEditForm: boolean = false;
-    btnText: string = "Add a mountain";
+    showForm: boolean = false;
+    btnText: string = "Add a new mountain";
     btnIcon: string = "add";
+    editModeOfTheFormOn: boolean = false;
 
     constructor() { }
 
     ngOnInit(): void { }
 
     toggleAddFormVisibility(): void {
-        this.showAddForm = !this.showAddForm;
-        if (this.showAddForm) {
+        this.showForm = !this.showForm;
+        if (this.showForm) {
+            this.turnOffEditMode();
             this.btnText = "Cancel form"
             this.btnIcon = "close"
         } else {
-            this.btnText = "Add a mountain"
+            this.turnOffEditMode();
+            this.btnText = "Add a new mountain"
             this.btnIcon = "add"
         }
     }
 
-    makeEditFormVisible(): void {
-        this.showEditForm = true;
+    turnOnEditMode(): void {
+        this.showForm = true;
+        this.btnText = "Cancel form"
+        this.btnIcon = "close"
+        this.editModeOfTheFormOn = true;
+    }
+
+    turnOffEditMode(): void {
+        this.editModeOfTheFormOn = false;
+        this.btnText = "Add a new mountain"
+        this.btnIcon = "add"
     }
 }

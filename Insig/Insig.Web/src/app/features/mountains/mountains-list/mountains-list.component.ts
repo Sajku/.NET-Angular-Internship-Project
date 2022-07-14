@@ -25,7 +25,6 @@ export class MountainsListComponent implements AfterViewInit {
   rowClick(): void {
     this.elementChosen.emit();
   }
-
 }
 
 export interface PeriodicElement {
