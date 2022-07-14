@@ -7,7 +7,9 @@
         class="example-full-width"
         appearance="fill">
             <mat-label>Mountain Name</mat-label>
-            <input matInput>
+            <input matInput
+                [(ngModel)]="currentMountain.name"
+                [ngModelOptions]="{standalone: true}">
             <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                 Please enter a valid email address
             </mat-error> -->

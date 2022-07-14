@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiMountainService } from '@app/core/services/api-mountain.service';
+import { switchMapTo } from 'rxjs/operators';
 
 export interface MountainDto {
     name: string;
@@ -31,11 +32,28 @@ export class MountainsComponent implements OnInit {
     editModeOfTheFormOn: boolean = false;
 
     mountains!: Observable<MountainDto[]>;
+    currentMountain: MountainDto;
 
-    constructor(private _mountainService: ApiMountainService) { }
+    constructor(private _mountainService: ApiMountainService) {
+        this.currentMountain = {
+            name: "",
+            height: 0,
+            difficulty: "",
+            country: "",
+            range: "",
+            park: "",
+            shelter: "",
+            shelterDistance: 0,
+            foodQuality: "",
+            alwaysSnow: false,
+            liftAvailable: false,
+            trails: 0,
+            isDeleted: false
+        } as MountainDto;
+    }
 
     ngOnInit(): void {
-        this.mountains = this._mountainService.getMountainData();
+        this.getMountains();
     }
 
     toggleAddFormVisibility(): void {
@@ -49,6 +67,7 @@ export class MountainsComponent implements OnInit {
             this.btnText = "Add a new mountain"
             this.btnIcon = "add"
         }
+        console.log(this.currentMountain);
     }
 
     turnOnEditMode(): void {
@@ -68,4 +87,10 @@ export class MountainsComponent implements OnInit {
         this.mountains = this._mountainService.getMountainData();
     }
 
+    addMountain(mountain: MountainDto): void {
+        this.mountains = this._mountainService.addMountainData(mountain)
+            .pipe(
+                switchMapTo(this._mountainService.getMountainData())
+            );
+    }
 }

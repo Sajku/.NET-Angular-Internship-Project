@@ -18,12 +18,15 @@
         <app-mountain-form
             [editModeOn]="editModeOfTheFormOn"
             (turnOffEditMode)="turnOffEditMode()"
+            [currentMountain]="currentMountain"
+            (addMountain)="addMountain(currentMountain)"
         ></app-mountain-form>
     </mat-card>
 
     <app-mountains-list
         (elementChosen)="turnOnEditMode()"
-        [mountainsData]="mountains">
+        [mountainsData]="mountains"
+        [currentMountain]="currentMountain">
     </app-mountains-list>
 
 </mat-card>

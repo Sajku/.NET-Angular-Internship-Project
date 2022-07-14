@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { MountainDto } from '../mountains.component';
 
 @Component({
   selector: 'app-mountain-form',
@@ -8,21 +9,18 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class MountainFormComponent implements OnInit {
     @Input() editModeOn: boolean = false;
     @Output() turnOffEditMode = new EventEmitter();
-
+    @Output() addMountain = new EventEmitter();
+    @Input() currentMountain: MountainDto;
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   btnClick(): void {
     this.turnOffEditMode.emit();
     if (this.editModeOn) {
         console.log("EDIT MODE!!!");
     } else  {
-        console.log("ADD MODE ACTIVE.");
+        this.addMountain.emit(this.currentMountain);
     }
   }
-
-
-
 }

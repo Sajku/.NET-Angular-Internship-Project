@@ -33,7 +33,7 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row
-        (click)="rowClick()"
+        (click)="currentMountain = row"
         *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
