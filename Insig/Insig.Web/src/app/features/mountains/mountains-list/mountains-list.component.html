@@ -1,34 +1,34 @@
 <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
 
-    <ng-container matColumnDef="Name">
+    <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="Height">
+    <ng-container matColumnDef="height">
         <th mat-header-cell *matHeaderCellDef> Height </th>
-        <td mat-cell *matCellDef="let element"> {{element.Height}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.height}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="Country">
+    <ng-container matColumnDef="country">
         <th mat-header-cell *matHeaderCellDef> Country </th>
-        <td mat-cell *matCellDef="let element"> {{element.Country}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.country}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="Range">
+    <ng-container matColumnDef="range">
         <th mat-header-cell *matHeaderCellDef> Mount.Range </th>
-        <td mat-cell *matCellDef="let element"> {{element.Range}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.range}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="Difficulty">
+    <ng-container matColumnDef="difficulty">
         <th mat-header-cell *matHeaderCellDef> Difficulty </th>
-        <td mat-cell *matCellDef="let element"> {{element.Difficulty}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.difficulty}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="Distance">
+    <ng-container matColumnDef="distance">
         <th mat-header-cell *matHeaderCellDef> Distance To Shelter </th>
-        <td mat-cell *matCellDef="let element"> {{element.ShelterDistance}} </td>
+        <td mat-cell *matCellDef="let element"> {{ element.shelterDistance !== 0 ? element.shelterDistance : "-"}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

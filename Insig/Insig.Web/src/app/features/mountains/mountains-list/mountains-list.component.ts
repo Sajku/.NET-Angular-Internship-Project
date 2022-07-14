@@ -13,17 +13,24 @@ export class MountainsListComponent implements AfterViewInit {
     @Output() elementChosen = new EventEmitter();
     @Input() mountainsData: Observable<MountainDto[]>;
 
-  displayedColumns: string[] = ['Name', 'Height', 'Country', 'Range', 'Difficulty', 'Distance'];
-  dataSource = new MatTableDataSource<MountainDto>(ELEMENT_DATA);
+  displayedColumns: string[] = ['name', 'height', 'country', 'range', 'difficulty', 'distance'];
+  dataSource = new MatTableDataSource<MountainDto>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    this.getMountainsData().subscribe(items => {
+        this.dataSource.data = items;
+        this.dataSource.paginator = this.paginator;
+    })
   }
 
   rowClick(): void {
     this.elementChosen.emit();
+  }
+
+  getMountainsData(): Observable<MountainDto[]> {
+    return this.mountainsData;
   }
 }
 
