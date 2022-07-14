@@ -21,6 +21,15 @@
         ></app-mountain-form>
     </mat-card>
 
-    <app-mountains-list (elementChosen)="turnOnEditMode()"></app-mountains-list>
+    <app-mountains-list
+        (elementChosen)="turnOnEditMode()"
+        [mountainsData]="mountains">
+    </app-mountains-list>
+
+    <ul>
+        <li *ngFor="let mountain of mountains | async">
+            Name: {{ mountain.name }}
+        </li>
+    </ul>
 
 </mat-card>
