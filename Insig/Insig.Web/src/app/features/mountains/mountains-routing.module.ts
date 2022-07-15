@@ -6,7 +6,7 @@ import { MountainsComponent } from './mountains.component';
 const routes: Routes = [
     {
         path: 'mountains',
-        component: MountainsComponent
+        component: MountainsComponent,
     }
 ];
 

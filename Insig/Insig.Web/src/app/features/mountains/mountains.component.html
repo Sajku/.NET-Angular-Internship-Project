@@ -1,7 +1,6 @@
 <mat-card>
 
     <mat-toolbar>
-
         <h1> {{ title }} </h1>
 
         <span class="fill-remaining-space"></span>
@@ -11,15 +10,14 @@
             (click)="toggleAddFormVisibility()">
             <mat-icon>{{ btnIcon }}</mat-icon>{{ btnText }}
         </button>
-
     </mat-toolbar>
 
     <mat-card *ngIf="showForm">
         <app-mountain-form
             [editModeOn]="editModeOfTheFormOn"
-            (turnOffEditMode)="turnOffEditMode()"
+            (editMountain)="editMountain()"
             [currentMountain]="currentMountain"
-            (addMountain)="addMountain(currentMountain)"
+            (addMountain)="addMountain()"
         ></app-mountain-form>
     </mat-card>
 

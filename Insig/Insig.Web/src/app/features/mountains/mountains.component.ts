@@ -1,21 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { ApiMountainService } from '@app/core/services/api-mountain.service';
 import { switchMapTo } from 'rxjs/operators';
+import { MountainsListComponent } from './mountains-list/mountains-list.component';
 
 export interface MountainDto {
     name: string;
-    height: number;
+    height?: number;
     difficulty: string;
     country: string;
     range: string;
     park: string;
     shelter: string;
-    shelterDistance: number;
+    shelterDistance?: number;
     foodQuality: string;
     alwaysSnow: boolean;
     liftAvailable: boolean;
-    trails: number;
+    trails?: number;
     isDeleted: boolean;
 }
 
@@ -30,24 +31,31 @@ export class MountainsComponent implements OnInit {
     btnText: string = "Add a new mountain";
     btnIcon: string = "add";
     editModeOfTheFormOn: boolean = false;
+    subscription!: Subscription;
+
+    tableRefreshSubject: Subject<void> = new Subject<void>();
 
     mountains!: Observable<MountainDto[]>;
     currentMountain: MountainDto;
 
+
+    @ViewChild(MountainsListComponent, { static: false })
+    listComponent: MountainsListComponent;
+
     constructor(private _mountainService: ApiMountainService) {
         this.currentMountain = {
             name: "",
-            height: 0,
+            height: undefined,
             difficulty: "",
             country: "",
             range: "",
             park: "",
             shelter: "",
-            shelterDistance: 0,
+            shelterDistance: undefined,
             foodQuality: "",
             alwaysSnow: false,
             liftAvailable: false,
-            trails: 0,
+            trails: undefined,
             isDeleted: false
         } as MountainDto;
     }
@@ -67,20 +75,14 @@ export class MountainsComponent implements OnInit {
             this.btnText = "Add a new mountain"
             this.btnIcon = "add"
         }
-        console.log(this.currentMountain);
     }
 
     listElementChosen(clickedRow: MountainDto): void {
-        this.showForm = true;
-        this.btnText = "Cancel form"
-        this.btnIcon = "close"
-        this.editModeOfTheFormOn = true;
-        this.currentMountain = clickedRow ;
-        console.log(clickedRow);
-        console.log(this.currentMountain);
+        this.turnOnEditMode();
+        this.currentMountain = clickedRow;
     }
 
-    turnOnEditMode(clickedRow: MountainDto): void {
+    turnOnEditMode(): void {
         this.showForm = true;
         this.btnText = "Cancel form"
         this.btnIcon = "close"
@@ -97,10 +99,28 @@ export class MountainsComponent implements OnInit {
         this.mountains = this._mountainService.getMountainData();
     }
 
-    addMountain(currentMountain: MountainDto): void {
-        this.mountains = this._mountainService.addMountainData(currentMountain)
+    addMountain(): void {
+        this.mountains = this._mountainService.addMountainData(this.currentMountain)
             .pipe(
                 switchMapTo(this._mountainService.getMountainData())
             );
+
+        this.subscription = this.mountains
+        .subscribe();
+
+        this.getMountains();
+        setTimeout(() => {
+            this.listComponent.refresh();
+          }, 500)
+
+    }
+
+    editMountain(): void {
+        this.turnOffEditMode();
+        this.toggleAddFormVisibility();
+    }
+
+    refreshTable() {
+        this.tableRefreshSubject.next();
     }
 }

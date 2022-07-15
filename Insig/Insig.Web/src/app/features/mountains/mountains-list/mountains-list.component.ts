@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ViewChild, Output, EventEmitter, Input} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { MountainDto } from '../mountains.component';
 
 @Component({
@@ -19,7 +19,13 @@ export class MountainsListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngAfterViewInit() {
-    this.getMountainsData().subscribe(items => {
+    this.refresh();
+  }
+
+  refresh() {
+    console.log("REFRESH!!!!!!!!");
+
+    this.mountainsData.subscribe(items => {
         this.dataSource.data = items;
         this.dataSource.paginator = this.paginator;
     })
@@ -27,9 +33,5 @@ export class MountainsListComponent implements AfterViewInit {
 
   rowClick(row: MountainDto | undefined) {
     this.elementChosen.emit(row);
-  }
-
-  getMountainsData(): Observable<MountainDto[]> {
-    return this.mountainsData;
   }
 }
