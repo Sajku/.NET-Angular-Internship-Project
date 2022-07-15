@@ -20,7 +20,10 @@
         class="example-full-width"
         appearance="fill">
             <mat-label>Mountain Height [m]</mat-label>
-            <input matInput type="number" max="8849" min="1">
+            <input matInput
+                    [(ngModel)]="currentMountain.height"
+                    [ngModelOptions]="{standalone: true}"
+                    type="number" max="8849" min="1">
       </mat-form-field>
       </td>
       <td class="last-td">
@@ -28,13 +31,14 @@
         class="example-full-width"
         appearance="fill">
             <mat-label>Difficulty</mat-label>
-            <mat-select>
-                <mat-option value="one">Family Friendly</mat-option>
-                <mat-option value="two">Easy</mat-option>
-                <mat-option value="three">Medium</mat-option>
-                <mat-option value="four">Hard</mat-option>
-                <mat-option value="five">Extreme</mat-option>
-                <mat-option value="six">You can die!</mat-option>
+            <mat-select [(ngModel)]="currentMountain.difficulty"
+                        [ngModelOptions]="{standalone: true}">
+            <mat-option value="Family Friendly">Family Friendly</mat-option>
+            <mat-option value="Easy">Easy</mat-option>
+            <mat-option value="Medium">Medium</mat-option>
+            <mat-option value="Hard">Hard</mat-option>
+            <mat-option value="Extreme">Extreme</mat-option>
+            <mat-option value="You can die!">You can die!</mat-option>
             </mat-select>
       </mat-form-field>
       </td>
@@ -46,7 +50,11 @@
           class="example-full-width"
           appearance="fill">
               <mat-label>Country</mat-label>
-              <textarea matInput placeholder="Ex. Poland"></textarea>
+              <textarea matInput
+                        placeholder="Ex. Poland"
+                        [(ngModel)]="currentMountain.country"
+                        [ngModelOptions]="{standalone: true}">
+              </textarea>
         </mat-form-field>
         </td>
         <td>
@@ -54,7 +62,11 @@
           class="example-full-width"
           appearance="fill">
               <mat-label>Mountain Range</mat-label>
-              <textarea matInput placeholder="Ex. The Sudetes"></textarea>
+              <textarea matInput
+                        placeholder="Ex. The Sudetes"
+                        [(ngModel)]="currentMountain.range"
+                        [ngModelOptions]="{standalone: true}">
+              </textarea>
         </mat-form-field>
         </td>
         <td class="last-td">
@@ -62,7 +74,11 @@
               class="example-full-width"
               appearance="fill">
                   <mat-label>National Park</mat-label>
-                  <textarea matInput placeholder="Ex. Tatry National Park"></textarea>
+                  <textarea matInput
+                            placeholder="Ex. Tatry National Park"
+                            [(ngModel)]="currentMountain.park"
+                            [ngModelOptions]="{standalone: true}">
+                  </textarea>
             </mat-form-field>
         </td>
     </tr>
@@ -73,7 +89,9 @@
           class="example-full-width"
           appearance="fill">
               <mat-label>Name Of The Nearest Mountain Shelter</mat-label>
-              <input matInput>
+              <input matInput
+                    [(ngModel)]="currentMountain.shelter"
+                    [ngModelOptions]="{standalone: true}">
         </mat-form-field>
         </td>
         <td>
@@ -81,7 +99,9 @@
           class="example-full-width"
           appearance="fill">
               <mat-label>Distance to the Nearest Shelter [km]</mat-label>
-              <input matInput>
+              <input matInput
+                    [(ngModel)]="currentMountain.shelterDistance"
+                    [ngModelOptions]="{standalone: true}">
         </mat-form-field>
         </td>
         <td  class="last-td">
@@ -89,13 +109,15 @@
               class="example-full-width"
               appearance="fill">
                   <mat-label>Quality Of Food in Shelter</mat-label>
-                  <mat-select>
-                    <mat-option value="zero">Food Not Available</mat-option>
-                    <mat-option value="one">Awful</mat-option>
-                    <mat-option value="two">Bad</mat-option>
-                    <mat-option value="three">Medium</mat-option>
-                    <mat-option value="four">Good</mat-option>
-                    <mat-option value="five">Delicious</mat-option>
+                  <mat-select
+                            [(ngModel)]="currentMountain.foodQuality"
+                            [ngModelOptions]="{standalone: true}">
+                    <mat-option value="Food Not Available">Food Not Available</mat-option>
+                    <mat-option value="Awful">Awful</mat-option>
+                    <mat-option value="Bad">Bad</mat-option>
+                    <mat-option value="Medium">Medium</mat-option>
+                    <mat-option value="Good">Good</mat-option>
+                    <mat-option value="Delicious">Delicious</mat-option>
                 </mat-select>
             </mat-form-field>
         </td>
@@ -103,12 +125,20 @@
     <tr>
         <td>
             <section class="example-section">
-                <mat-checkbox>Always Snow Conditions</mat-checkbox>
+                <mat-checkbox
+                            [(ngModel)]="currentMountain.alwaysSnow"
+                            [ngModelOptions]="{standalone: true}">
+                    Always Snow Conditions
+                </mat-checkbox>
             </section>
         </td>
         <td>
             <section class="example-section">
-                <mat-checkbox>Mountain Lift Available</mat-checkbox>
+                <mat-checkbox
+                            [(ngModel)]="currentMountain.liftAvailable"
+                            [ngModelOptions]="{standalone: true}">
+                    Mountain Lift Available
+                </mat-checkbox>
             </section>
         </td>
         <td  class="last-td">
@@ -119,13 +149,19 @@
             <mat-slider min="1" max="10" step="1"
                 thumbLabel
                 [tickInterval]="1"
+                [(ngModel)]="currentMountain.trails"
+                [ngModelOptions]="{standalone: true}"
                 ></mat-slider>
         </td>
     </tr>
     </table>
 
     <section class="example-section" *ngIf="editModeOn">
-        <mat-checkbox>Is Deleted</mat-checkbox>
+        <mat-checkbox
+                    [(ngModel)]="currentMountain.isDeleted"
+                    [ngModelOptions]="{standalone: true}">
+            Is Deleted
+        </mat-checkbox>
     </section>
 
     <button mat-raised-button class="btn"

@@ -9,7 +9,7 @@ import { MountainDto } from '../mountains.component';
 export class MountainFormComponent implements OnInit {
     @Input() editModeOn: boolean = false;
     @Output() turnOffEditMode = new EventEmitter();
-    @Output() addMountain = new EventEmitter();
+    @Output() addMountain: EventEmitter<MountainDto> = new EventEmitter();
     @Input() currentMountain: MountainDto;
   constructor() { }
 

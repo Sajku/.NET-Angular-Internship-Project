@@ -70,7 +70,17 @@ export class MountainsComponent implements OnInit {
         console.log(this.currentMountain);
     }
 
-    turnOnEditMode(): void {
+    listElementChosen(clickedRow: MountainDto): void {
+        this.showForm = true;
+        this.btnText = "Cancel form"
+        this.btnIcon = "close"
+        this.editModeOfTheFormOn = true;
+        this.currentMountain = clickedRow ;
+        console.log(clickedRow);
+        console.log(this.currentMountain);
+    }
+
+    turnOnEditMode(clickedRow: MountainDto): void {
         this.showForm = true;
         this.btnText = "Cancel form"
         this.btnIcon = "close"
@@ -87,8 +97,8 @@ export class MountainsComponent implements OnInit {
         this.mountains = this._mountainService.getMountainData();
     }
 
-    addMountain(mountain: MountainDto): void {
-        this.mountains = this._mountainService.addMountainData(mountain)
+    addMountain(currentMountain: MountainDto): void {
+        this.mountains = this._mountainService.addMountainData(currentMountain)
             .pipe(
                 switchMapTo(this._mountainService.getMountainData())
             );

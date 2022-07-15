@@ -43,7 +43,6 @@ namespace Insig.Api.Controllers
             return Ok();
         }
 
-        [Authorize(Policies.Consumer)]
         [HttpGet("mountains")]
         public async Task<IActionResult> GetMountains([FromQuery] MountainParameter parameter)
         {
@@ -51,7 +50,6 @@ namespace Insig.Api.Controllers
             return Ok(result);
         }
 
-        [Authorize(Policies.Consumer)]
         [HttpPost("mountains")]
         public async Task<IActionResult> AddMountains([FromBody] AddMountainCommand command)
         {

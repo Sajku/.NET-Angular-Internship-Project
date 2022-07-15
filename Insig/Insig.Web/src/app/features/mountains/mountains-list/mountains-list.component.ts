@@ -10,10 +10,8 @@ import { MountainDto } from '../mountains.component';
   styleUrls: ['./mountains-list.component.scss']
 })
 export class MountainsListComponent implements AfterViewInit {
-    @Output() elementChosen = new EventEmitter();
+    @Output() elementChosen: EventEmitter<MountainDto> = new EventEmitter();
     @Input() mountainsData: Observable<MountainDto[]>;
-    @Input() currentMountain: MountainDto;
-    //clickedRows = new Set<MountainDto>();
 
   displayedColumns: string[] = ['name', 'height', 'country', 'range', 'difficulty', 'distance'];
   dataSource = new MatTableDataSource<MountainDto>();
@@ -27,12 +25,11 @@ export class MountainsListComponent implements AfterViewInit {
     })
   }
 
-  rowClick(): void {
-    this.elementChosen.emit();
+  rowClick(row: MountainDto | undefined) {
+    this.elementChosen.emit(row);
   }
 
   getMountainsData(): Observable<MountainDto[]> {
     return this.mountainsData;
   }
 }
-
