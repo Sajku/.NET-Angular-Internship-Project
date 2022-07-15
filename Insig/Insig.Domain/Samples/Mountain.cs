@@ -6,8 +6,8 @@ namespace Insig.Domain.Samples
     public class Mountain
     {
         public Mountain(string name, int height, string difficulty, string country,
-                        string range, string shelter, double shelterDistance, string foodQuality,
-                        bool alwaysSnow, bool liftAvailable, int trails, bool isDeleted)
+                        string range, string park, string shelter, double shelterDistance,
+                        string foodQuality, bool alwaysSnow, bool liftAvailable, int trails, bool isDeleted)
         {
             EnsureThatNameIsCorrect(name);
 
@@ -16,6 +16,7 @@ namespace Insig.Domain.Samples
             Difficulty = difficulty;
             Country = country;
             Range = range;
+            Park = park;
             Shelter = shelter;
             ShelterDistance = shelterDistance;
             FoodQuality = foodQuality;

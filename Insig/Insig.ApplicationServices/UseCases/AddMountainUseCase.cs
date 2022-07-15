@@ -23,7 +23,7 @@ namespace Insig.ApplicationServices.UseCases
             _mountainRepository.EnsureThatMountainDoesNotExist(command.Name);
 
             Mountain tempMountain = new Mountain(command.Name, command.Height,
-                command.Difficulty, command.Country, command.Range, command.Shelter,
+                command.Difficulty, command.Country, command.Range, command.Park, command.Shelter,
                 command.ShelterDistance, command.FoodQuality, command.AlwaysSnow,
                 command.LiftAvailable, command.Trails, command.IsDeleted);
             _mountainRepository.Store(tempMountain);
