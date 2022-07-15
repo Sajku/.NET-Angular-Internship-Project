@@ -5,19 +5,19 @@ import { switchMapTo } from 'rxjs/operators';
 import { MountainsListComponent } from './mountains-list/mountains-list.component';
 
 export interface MountainDto {
-    name: string;
+    name?: string;
     height?: number;
-    difficulty: string;
-    country: string;
-    range: string;
-    park: string;
-    shelter: string;
+    difficulty?: string;
+    country?: string;
+    range?: string;
+    park?: string;
+    shelter?: string;
     shelterDistance?: number;
-    foodQuality: string;
-    alwaysSnow: boolean;
-    liftAvailable: boolean;
+    foodQuality?: string;
+    alwaysSnow?: boolean;
+    liftAvailable?: boolean;
     trails?: number;
-    isDeleted: boolean;
+    isDeleted?: boolean;
 }
 
 @Component({

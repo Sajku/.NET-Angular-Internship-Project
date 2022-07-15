@@ -31,9 +31,30 @@
         <td mat-cell *matCellDef="let element"> {{ element.shelterDistance !== 0 ? element.shelterDistance : "-"}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="isDeleted">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element">
+            <label class="checkbox-container">
+                <input type="checkbox"
+                    [(ngModel)]="element.isDeleted">
+                <span class="checkmark"></span>
+            </label>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef> Edit </th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-stroked-button color="primary"
+                class="edit-btn"
+                (click)="rowClick(element.name)">
+                <mat-icon class="edit-icon">edit</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row
-        (click)="rowClick(row); "
         *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
@@ -41,4 +62,14 @@
         showFirstLastButtons
         aria-label="Select page of periodic elements">
     </mat-paginator>
+
+    <tr class *ngFor="let media of (result)">
+        <td>
+            <p>{{ media }}</p>
+        </td>
+    </tr>
+
+    <p>{{ result2 }}</p>
+
+
 </div>
