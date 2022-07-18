@@ -5,6 +5,7 @@ import { switchMapTo } from 'rxjs/operators';
 import { MountainsListComponent } from './mountains-list/mountains-list.component';
 
 export interface MountainDto {
+    id?: number;
     name?: string;
     height?: number;
     difficulty?: string;
@@ -33,8 +34,6 @@ export class MountainsComponent implements OnInit {
     editModeOfTheFormOn: boolean = false;
     subscription!: Subscription;
 
-    tableRefreshSubject: Subject<void> = new Subject<void>();
-
     mountains!: Observable<MountainDto[]>;
     currentMountain: MountainDto;
 
@@ -44,6 +43,7 @@ export class MountainsComponent implements OnInit {
 
     constructor(private _mountainService: ApiMountainService) {
         this.currentMountain = {
+            id: 0,
             name: "",
             height: undefined,
             difficulty: "",
@@ -82,6 +82,10 @@ export class MountainsComponent implements OnInit {
         this.currentMountain = clickedRow;
     }
 
+    editStatus(eventData: {x: number, y: boolean}) {
+        this.editMountainStatus(eventData.x, eventData.y);
+    }
+
     turnOnEditMode(): void {
         this.showForm = true;
         this.btnText = "Cancel form"
@@ -116,11 +120,38 @@ export class MountainsComponent implements OnInit {
     }
 
     editMountain(): void {
-        this.turnOffEditMode();
-        this.toggleAddFormVisibility();
+        this.mountains = this._mountainService.editMountainData(this.currentMountain)
+            .pipe(
+                switchMapTo(this._mountainService.getMountainData())
+            );
+
+        this.subscription = this.mountains
+        .subscribe();
+
+        this.getMountains();
+        setTimeout(() => {
+            this.listComponent.refresh();
+          }, 500)
     }
 
-    refreshTable() {
-        this.tableRefreshSubject.next();
+    editMountainStatus(x: number, y: boolean): void {
+        this.mountains = this._mountainService.editMountainStatusData(x, y)
+            .pipe(
+                switchMapTo(this._mountainService.getMountainData())
+            );
+
+        this.subscription = this.mountains
+        .subscribe();
+
+        this.getMountains();
+        setTimeout(() => {
+            this.listComponent.refresh();
+          }, 500)
+    }
+
+    changeEditMountainMode(): void {
+        this.turnOffEditMode();
+        this.toggleAddFormVisibility();
+        this.editMountain();
     }
 }

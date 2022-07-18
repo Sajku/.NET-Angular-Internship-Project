@@ -15,7 +15,7 @@
     <mat-card *ngIf="showForm">
         <app-mountain-form
             [editModeOn]="editModeOfTheFormOn"
-            (editMountain)="editMountain()"
+            (editMountain)="changeEditMountainMode()"
             [currentMountain]="currentMountain"
             (addMountain)="addMountain()"
         ></app-mountain-form>
@@ -23,6 +23,7 @@
 
     <app-mountains-list
         (elementChosen)="listElementChosen($event)"
+        (changeStatus)="editStatus($event)"
         [mountainsData]="mountains">
     </app-mountains-list>
 

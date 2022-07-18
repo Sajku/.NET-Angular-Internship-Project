@@ -12,6 +12,7 @@ import { map } from 'rxjs/operators';
 })
 export class MountainsListComponent implements AfterViewInit {
     @Output() elementChosen: EventEmitter<MountainDto> = new EventEmitter();
+    @Output() changeStatus: EventEmitter<{x: number, y: boolean}> = new EventEmitter();
     @Input() mountainsData: Observable<MountainDto[]>;
 
   displayedColumns: string[] = ['name', 'height', 'country', 'range', 'difficulty', 'distance', 'isDeleted', 'edit'];
@@ -32,55 +33,17 @@ export class MountainsListComponent implements AfterViewInit {
     })
   }
 
-  result:Array<Object>=[];
-  result2:any;
+  rowClick(name: string, height: number, difficulty: string, country: string,
+    range: string, park: string, shelter: string, shelterDistance: number,
+    foodQuality: string, alwaysSnow: boolean, liftAvailable: boolean,
+    trails: number, isDeleted: boolean) {
 
-  rowClick(tempName: string) {
+    this.elementChosen.emit( {name, height, difficulty, country, range,
+    park, shelter, shelterDistance, foodQuality, alwaysSnow,
+    liftAvailable, trails, isDeleted} as MountainDto);
+  }
 
-    // FIND CLICKED ROW IN MOUNTAINS ARRAY BY NAME
-    var temp = this.mountainsData
-        .pipe(
-            map(x =>
-            {
-                console.log(x);
-                return x.find(y => y.name == tempName)
-            })
-        );
-
-    var cm: MountainDto;
-    cm = {
-        name: "",
-        height: undefined,
-        difficulty: "",
-        country: "",
-        range: "",
-        park: "",
-        shelter: "",
-        shelterDistance: undefined,
-        foodQuality: "",
-        alwaysSnow: false,
-        liftAvailable: false,
-        trails: undefined,
-        isDeleted: false
-    } as MountainDto;
-
-    temp.subscribe(result => {
-        this.result2 = result
-        cm.name = this.result2.name;
-        cm.height = this.result2.height,
-        cm.difficulty = this.result2.difficulty,
-        cm.country = this.result2.country,
-        cm.range = this.result2.range,
-        cm.park = this.result2.park,
-        cm.shelter = this.result2.shelter,
-        cm.shelterDistance = this.result2.shelterDistance,
-        cm.foodQuality = this.result2.foodQuality,
-        cm.alwaysSnow = this.result2.alwaysSnow,
-        cm.liftAvailable = this.result2.liftAvailable,
-        cm.trails = this.result2.trails,
-        cm.isDeleted = this.result2.isDeleted
-    });
-
-    this.elementChosen.emit(cm);
+  rowStatusClick(tempId: number, tempStatus: boolean) {
+    this.changeStatus.emit({x: tempId, y: !tempStatus})
   }
 }

@@ -56,5 +56,19 @@ namespace Insig.Api.Controllers
             await _commandDispatcher.Dispatch(command);
             return Ok();
         }
+
+        [HttpPut("mountains")]
+        public async Task<IActionResult> EditMountains([FromBody] EditMountainCommand command)
+        {
+            await _commandDispatcher.Dispatch(command);
+            return Ok();
+        }
+
+        [HttpPatch("mountains")]
+        public async Task<IActionResult> EditMountainsStatus([FromBody] EditMountainStatusCommand command)
+        {
+            await _commandDispatcher.Dispatch(command);
+            return Ok();
+        }
     }
 }

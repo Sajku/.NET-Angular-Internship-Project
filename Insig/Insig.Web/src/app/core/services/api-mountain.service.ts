@@ -22,4 +22,12 @@ export class ApiMountainService {
     addMountainData(mountain: MountainDto): Observable<MountainDto> {
         return this._apiClientService.post(`${appConfig.apiUrl}/values/mountains`, { data: mountain });
     }
+
+    editMountainData(mountain: MountainDto): Observable<MountainDto> {
+        return this._apiClientService.put(`${appConfig.apiUrl}/values/mountains`, { data: mountain });
+    }
+
+    editMountainStatusData(id: number,status: boolean): Observable<MountainDto> {
+        return this._apiClientService.patch(`${appConfig.apiUrl}/values/mountains`, { data: {id: id, isDeleted: status} });
+    }
 }

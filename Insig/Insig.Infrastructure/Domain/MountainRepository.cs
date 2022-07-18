@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using EnsureThat;
 using Insig.ApplicationServices.Boundaries;
 using Insig.Common.Exceptions;
@@ -31,5 +32,10 @@ namespace Insig.Infrastructure.Domain
             _context.Mountains.Add(mountain);
         }
 
+        public void Update(Mountain mountain)
+        {
+            _context.Mountains.Attach(mountain);
+            _context.Entry(mountain).Property("IsDeleted").IsModified = true;
+        }
     }
 }

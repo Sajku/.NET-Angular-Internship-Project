@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Insig.Common.CQRS;
+using Insig.PublishedLanguage.Dtos;
 
-namespace Insig.PublishedLanguage.Dtos
+namespace Insig.PublishedLanguage.Commands
 {
-    public class MountainDTO
+    public class EditMountainCommand : ICommand
     {
         public int Id { get; set; }
         public string Name { get; set; }

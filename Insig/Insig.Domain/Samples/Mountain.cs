@@ -26,7 +26,35 @@ namespace Insig.Domain.Samples
             IsDeleted = isDeleted;
         }
 
-        public int Id { get; }
+        public Mountain(int id, string name, int height, string difficulty, string country,
+                        string range, string park, string shelter, double shelterDistance,
+                        string foodQuality, bool alwaysSnow, bool liftAvailable, int trails, bool isDeleted)
+        {
+            EnsureThatNameIsCorrect(name);
+
+            Id = id;
+            Name = name;
+            Height = height;
+            Difficulty = difficulty;
+            Country = country;
+            Range = range;
+            Park = park;
+            Shelter = shelter;
+            ShelterDistance = shelterDistance;
+            FoodQuality = foodQuality;
+            AlwaysSnow = alwaysSnow;
+            LiftAvailable = liftAvailable;
+            Trails = trails;
+            IsDeleted = isDeleted;
+        }
+
+        public Mountain(int id, bool isDeleted)
+        {
+            Id = id;
+            IsDeleted = isDeleted;
+        }
+
+        public int Id { get; private set; }
         public string Name { get; private set; }
         public int Height { get; private set; }
         public string Difficulty { get; private set; }

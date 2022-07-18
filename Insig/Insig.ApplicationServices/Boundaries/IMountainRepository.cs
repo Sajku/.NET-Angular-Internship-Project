@@ -6,5 +6,6 @@ namespace Insig.ApplicationServices.Boundaries
     {
         void EnsureThatMountainDoesNotExist(string name);
         void Store(Mountain mountain);
+        void Update(Mountain mountain);
     }
 }
