@@ -19,6 +19,10 @@ export class ApiMountainService {
         return this._apiClientService.get(`${appConfig.apiUrl}/values/mountains`);
     }
 
+    getFewMountainData(id: number): Observable<MountainDto[]> {
+        return this._apiClientService.get(`${appConfig.apiUrl}/values/mountains/${id}`,);
+    }
+
     addMountainData(mountain: MountainDto): Observable<MountainDto> {
         return this._apiClientService.post(`${appConfig.apiUrl}/values/mountains`, { data: mountain });
     }

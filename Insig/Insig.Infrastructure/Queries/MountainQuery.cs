@@ -20,11 +20,24 @@ namespace Insig.Infrastructure.Queries
 
         public async Task<List<MountainDTO>> GetMountainData(MountainParameter query)
         {
-            return await _sqlQueryBuilder
+            if (query.Id == null)
+            {
+                return await _sqlQueryBuilder
                 .Select("*")
                 .From("Mountain")
                 .BuildQuery<MountainDTO>()
                 .ExecuteToList();
+            }
+            else
+            {
+                return await _sqlQueryBuilder
+                .Select("*")
+                .From("Mountain")
+                .Where("Id", query.Id)
+                .BuildQuery<MountainDTO>()
+                .ExecuteToList();
+            }
+            
         }
 
     }

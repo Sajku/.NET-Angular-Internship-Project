@@ -50,6 +50,14 @@ namespace Insig.Api.Controllers
             return Ok(result);
         }
 
+        [HttpGet("mountains/{id:int}")]
+        public async Task<IActionResult> GetMountains([FromQuery] MountainParameter parameter, int id)
+        {
+            parameter.Id = id;
+            List<MountainDTO> result = await _queryDispatcher.Dispatch(parameter);
+            return Ok(result);
+        }
+
         [HttpPost("mountains")]
         public async Task<IActionResult> AddMountains([FromBody] AddMountainCommand command)
         {

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ApiMountainService } from '@app/core/services/api-mountain.service';
 import { switchMapTo } from 'rxjs/operators';
 import { MountainsListComponent } from './mountains-list/mountains-list.component';
@@ -27,9 +27,9 @@ export interface MountainDto {
     styleUrls: ['./mountains.component.scss'],
 })
 export class MountainsComponent implements OnInit {
-    title = "Mountains Collection";
+    title = "312312123Mountains Collection";
     showForm: boolean = false;
-    btnText: string = "Add a new mountain";
+    btnText: string = "312312321dasAdd a new mountain";
     btnIcon: string = "add";
     editModeOfTheFormOn: boolean = false;
     subscription!: Subscription;
@@ -153,5 +153,15 @@ export class MountainsComponent implements OnInit {
         this.turnOffEditMode();
         this.toggleAddFormVisibility();
         this.editMountain();
+    }
+
+    updatePaginatorData(eventData: {pageIndex: number, pageSize: number}): void {
+        var start: number = eventData.pageIndex * eventData.pageSize + 1;
+        var end: number = (eventData.pageIndex + 1) * eventData.pageSize;
+        var id = start;
+        while (id <= end) {
+            id++;
+        }
+        this._mountainService.getFewMountainData(id);
     }
 }

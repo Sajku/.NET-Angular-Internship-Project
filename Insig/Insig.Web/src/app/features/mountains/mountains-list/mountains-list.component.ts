@@ -1,9 +1,8 @@
-import {AfterViewInit, Component, ViewChild, Output, EventEmitter, Input} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
-import { Observable} from 'rxjs';
-import { MountainDto, MountainsComponent } from '../mountains.component';
-import { map } from 'rxjs/operators';
+import { AfterViewInit, Component, ViewChild, Output, EventEmitter, Input } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { Observable } from 'rxjs';
+import { MountainDto } from '../mountains.component';
 
 @Component({
   selector: 'app-mountains-list',
@@ -13,6 +12,7 @@ import { map } from 'rxjs/operators';
 export class MountainsListComponent implements AfterViewInit {
     @Output() elementChosen: EventEmitter<MountainDto> = new EventEmitter();
     @Output() changeStatus: EventEmitter<{x: number, y: boolean}> = new EventEmitter();
+    @Output() changePaginatorSettings: EventEmitter<{pageIndex: number, pageSize: number}> = new EventEmitter();
     @Input() mountainsData: Observable<MountainDto[]>;
 
   displayedColumns: string[] = ['name', 'height', 'country', 'range', 'difficulty', 'distance', 'isDeleted', 'edit'];
@@ -25,8 +25,6 @@ export class MountainsListComponent implements AfterViewInit {
   }
 
   refresh() {
-    console.log("REFRESH!!!!!!!!");
-
     this.mountainsData.subscribe(items => {
         this.dataSource.data = items;
         this.dataSource.paginator = this.paginator;
@@ -45,5 +43,10 @@ export class MountainsListComponent implements AfterViewInit {
 
   rowStatusClick(tempId: number, tempStatus: boolean) {
     this.changeStatus.emit({x: tempId, y: !tempStatus})
+  }
+
+  getPaginatorData(event: PageEvent) {
+    console.log(event);
+    this.changePaginatorSettings.emit({pageIndex: event.pageIndex, pageSize: event.pageSize});
   }
 }

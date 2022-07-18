@@ -24,6 +24,7 @@
     <app-mountains-list
         (elementChosen)="listElementChosen($event)"
         (changeStatus)="editStatus($event)"
+        (changePaginatorSettings)="updatePaginatorData($event)"
         [mountainsData]="mountains">
     </app-mountains-list>
 

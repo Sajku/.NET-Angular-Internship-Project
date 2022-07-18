@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using EnsureThat;
+﻿using EnsureThat;
 using Insig.ApplicationServices.Boundaries;
 using Insig.Common.CQRS;
 using Insig.PublishedLanguage.Dtos;
 using Insig.PublishedLanguage.Queries;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Insig.ApplicationServices.UseCases
 {
