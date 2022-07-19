@@ -157,7 +157,9 @@ export class MountainsComponent implements OnInit {
                     var index = this.mountains.findIndex(item => item.id === element.id);
                     this.mountains[index] = element;
                 });
-                this.listComponent.refresh();
+                setTimeout(() => {
+                    this.listComponent.refresh();
+                },500)
             })
     }
 }
