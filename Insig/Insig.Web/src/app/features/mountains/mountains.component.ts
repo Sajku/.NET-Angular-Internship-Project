@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { combineLatest, merge, Observable, Subscription } from 'rxjs';
 import { ApiMountainService } from '@app/core/services/api-mountain.service';
-import { switchMapTo } from 'rxjs/operators';
+import { map, switchMapTo, tap } from 'rxjs/operators';
 import { MountainsListComponent } from './mountains-list/mountains-list.component';
 
 export interface MountainDto {
@@ -34,7 +34,7 @@ export class MountainsComponent implements OnInit {
     editModeOfTheFormOn: boolean = false;
     subscription!: Subscription;
 
-    mountains!: Observable<MountainDto[]>;
+    mountains!: MountainDto[];
     currentMountain: MountainDto;
 
     @ViewChild(MountainsListComponent, { static: false })
@@ -60,7 +60,10 @@ export class MountainsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.getMountains();
+        this._mountainService.getMountainDataById(0)
+            .subscribe(data => {
+                this.mountains = data;
+            });
     }
 
     toggleAddFormVisibility(): void {
@@ -98,33 +101,20 @@ export class MountainsComponent implements OnInit {
         this.btnIcon = "add"
     }
 
-    getMountains(): void {
-        this.mountains = this._mountainService.getMountainData();
-    }
-
     addMountain(): void {
-        this.mountains = this._mountainService.addMountainData(this.currentMountain)
-            .pipe(
-                switchMapTo(this._mountainService.getMountainData())
-            );
-
-        this.subscription = this.mountains
-        .subscribe();
+        this._mountainService.addMountainData(this.currentMountain)
+            .subscribe(data => {
+                this.mountains.push(data);
+            });
 
         setTimeout(() => {
             this.listComponent.refresh();
           }, 500)
-
     }
 
     editMountain(): void {
-        this.mountains = this._mountainService.editMountainData(this.currentMountain)
-            .pipe(
-                switchMapTo(this._mountainService.getMountainData())
-            );
-
-        this.subscription = this.mountains
-        .subscribe();
+        this._mountainService.editMountainData(this.currentMountain)
+            .subscribe(console.log);
 
         setTimeout(() => {
             this.listComponent.refresh();
@@ -132,13 +122,8 @@ export class MountainsComponent implements OnInit {
     }
 
     editMountainStatus(x: number, y: boolean): void {
-        this.mountains = this._mountainService.editMountainStatusData(x, y)
-            .pipe(
-                switchMapTo(this._mountainService.getMountainData())
-            );
-
-        this.subscription = this.mountains
-        .subscribe();
+        this._mountainService.editMountainStatusData(x, y)
+            .subscribe(console.log);
 
         setTimeout(() => {
             this.listComponent.refresh();
@@ -159,12 +144,20 @@ export class MountainsComponent implements OnInit {
             end = eventData.length;
         }
 
-        this.mountains = this._mountainService.getFewMountainData(start, end)
-            .pipe(
-                switchMapTo(this._mountainService.getMountainData())
-            );
+        var fewData: MountainDto[] = [];
+        this._mountainService.getFewMountainData(start, end)
+            .subscribe(data => {
+                fewData = data;
+            })
 
-        this.subscription = this.mountains
-        .subscribe();
+        setTimeout(() => {
+            fewData.forEach(element => {
+                console.log("Element:", element);
+                var index = this.mountains.findIndex(item => item.id === element.id);
+                console.log("Index: ", index);
+                this.mountains[index] = element;
+            });
+            this.listComponent.refresh();
+          }, 500)
     }
 }

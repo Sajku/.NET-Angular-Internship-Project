@@ -13,7 +13,7 @@ export class MountainsListComponent implements AfterViewInit {
     @Output() elementChosen: EventEmitter<MountainDto> = new EventEmitter();
     @Output() changeStatus: EventEmitter<{x: number, y: boolean}> = new EventEmitter();
     @Output() changePaginatorSettings: EventEmitter<{pageIndex: number, pageSize: number, length: number}> = new EventEmitter();
-    @Input() mountainsData: Observable<MountainDto[]>;
+    @Input() mountainsData: MountainDto[];
 
   displayedColumns: string[] = ['name', 'height', 'country', 'range', 'difficulty', 'distance', 'isDeleted', 'edit'];
   dataSource = new MatTableDataSource<MountainDto>();
@@ -21,14 +21,14 @@ export class MountainsListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngAfterViewInit() {
+    this.getPaginatorData({pageIndex: 0, pageSize: 5, length: 10} as PageEvent);
     this.refresh();
   }
 
   refresh() {
-    this.mountainsData.subscribe(items => {
-        this.dataSource.data = items;
-        this.dataSource.paginator = this.paginator;
-    })
+    console.log("REFRESH!");
+    this.dataSource.data = this.mountainsData;
+    this.dataSource.paginator = this.paginator;
   }
 
   rowClick(name: string, height: number, difficulty: string, country: string,
