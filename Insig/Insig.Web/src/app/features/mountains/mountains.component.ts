@@ -64,6 +64,7 @@ export class MountainsComponent implements OnInit {
 
     ngOnInit(): void {
         this.getAllMountainsIds();
+        this.updatePaginatorData({ pageIndex: 0, pageSize: 5, length: 10});
     }
 
     toggleAddFormVisibility(): void {
@@ -117,37 +118,23 @@ export class MountainsComponent implements OnInit {
         this._mountainService.addMountainData(this.currentMountain)
             .subscribe(data => {
                 this.mountains.push(data);
+                this.listComponent.refresh();
             });
-
-        setTimeout(() => {
-            this.listComponent.refresh();
-          }, 200)
     }
 
     editMountain(): void {
         this._mountainService.editMountainData(this.currentMountain)
-            .subscribe();
-
-
-
-        setTimeout(() => {
-            this.updatePaginatorData({pageIndex: this.lastPageIndex,
-                pageSize: this.lastPageSize,
-                length: this.lastLength});
-        }, 100)
-
-        setTimeout(() => {
-            this.listComponent.refresh();
-          }, 100)
+            .subscribe(() => {
+                this.updatePaginatorData({pageIndex: this.lastPageIndex,
+                    pageSize: this.lastPageSize,
+                    length: this.lastLength});
+                this.listComponent.refresh();
+            });
     }
 
     editMountainStatus(eventData: {x: number, y: boolean}): void {
         this._mountainService.editMountainStatusData(eventData.x, eventData.y)
-            .subscribe();
-
-        setTimeout(() => {
-            this.listComponent.refresh();
-          }, 200)
+            .subscribe(() => this.listComponent.refresh());
     }
 
     updatePaginatorData(eventData: {pageIndex: number, pageSize: number, length: number}): void {
@@ -166,14 +153,11 @@ export class MountainsComponent implements OnInit {
         this._mountainService.getFewMountainData(start, end)
             .subscribe(data => {
                 fewData = data;
+                fewData.forEach(element => {
+                    var index = this.mountains.findIndex(item => item.id === element.id);
+                    this.mountains[index] = element;
+                });
+                this.listComponent.refresh();
             })
-
-        setTimeout(() => {
-            fewData.forEach(element => {
-                var index = this.mountains.findIndex(item => item.id === element.id);
-                this.mountains[index] = element;
-            });
-            this.listComponent.refresh();
-          }, 300)
     }
 }
