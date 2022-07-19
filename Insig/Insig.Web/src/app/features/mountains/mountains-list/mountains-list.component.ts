@@ -31,12 +31,12 @@ export class MountainsListComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  rowClick(name: string, height: number, difficulty: string, country: string,
+  rowClick(id: number, name: string, height: number, difficulty: string, country: string,
     range: string, park: string, shelter: string, shelterDistance: number,
     foodQuality: string, alwaysSnow: boolean, liftAvailable: boolean,
     trails: number, isDeleted: boolean) {
 
-    this.elementChosen.emit( {name, height, difficulty, country, range,
+    this.elementChosen.emit( {id, name, height, difficulty, country, range,
     park, shelter, shelterDistance, foodQuality, alwaysSnow,
     liftAvailable, trails, isDeleted} as MountainDto);
   }

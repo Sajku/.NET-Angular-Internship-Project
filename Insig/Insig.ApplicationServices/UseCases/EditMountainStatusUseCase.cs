@@ -21,7 +21,7 @@ namespace Insig.ApplicationServices.UseCases
         public async Task Handle(EditMountainStatusCommand command)
         {
             Mountain tempMountain = new Mountain(command.Id, command.IsDeleted);
-            _mountainRepository.Update(tempMountain);
+            _mountainRepository.UpdateStatus(tempMountain);
             await _unitOfWork.Save();
         }
     }

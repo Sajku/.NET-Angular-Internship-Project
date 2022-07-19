@@ -152,9 +152,7 @@ export class MountainsComponent implements OnInit {
 
         setTimeout(() => {
             fewData.forEach(element => {
-                console.log("Element:", element);
                 var index = this.mountains.findIndex(item => item.id === element.id);
-                console.log("Index: ", index);
                 this.mountains[index] = element;
             });
             this.listComponent.refresh();

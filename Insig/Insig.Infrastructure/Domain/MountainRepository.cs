@@ -34,6 +34,11 @@ namespace Insig.Infrastructure.Domain
 
         public void Update(Mountain mountain)
         {
+            _context.Mountains.Update(mountain);
+        }
+
+        public void UpdateStatus(Mountain mountain)
+        {
             _context.Mountains.Attach(mountain);
             _context.Entry(mountain).Property("IsDeleted").IsModified = true;
         }
