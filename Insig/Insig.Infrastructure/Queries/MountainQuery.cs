@@ -28,12 +28,20 @@ namespace Insig.Infrastructure.Queries
                 .BuildQuery<MountainDTO>()
                 .ExecuteToList();
             }
-            else if (query.Id != null)
+            else if (query.Id != null && query.Id != 0)
             {
                 return await _sqlQueryBuilder
                 .Select("*")
                 .From("Mountain")
                 .Where("Id", query.Id)
+                .BuildQuery<MountainDTO>()
+                .ExecuteToList();
+            }
+            else if (query.Id != null && query.Id == 0)
+            {
+                return await _sqlQueryBuilder
+                .Select("Id")
+                .From("Mountain")
                 .BuildQuery<MountainDTO>()
                 .ExecuteToList();
             }
