@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { combineLatest, merge, Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { ApiMountainService } from '@app/core/services/api-mountain.service';
-import { map, switchMapTo, tap } from 'rxjs/operators';
 import { MountainsListComponent } from './mountains-list/mountains-list.component';
 
 export interface MountainDto {
@@ -37,6 +36,10 @@ export class MountainsComponent implements OnInit {
     mountains!: MountainDto[];
     currentMountain: MountainDto;
 
+    lastPageIndex: number = 0;
+    lastPageSize: number = 5;
+    lastLength: number = 10;
+
     @ViewChild(MountainsListComponent, { static: false })
     listComponent: MountainsListComponent;
 
@@ -60,10 +63,7 @@ export class MountainsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this._mountainService.getMountainDataById(0)
-            .subscribe(data => {
-                this.mountains = data;
-            });
+        this.getAllMountainsIds();
     }
 
     toggleAddFormVisibility(): void {
@@ -84,10 +84,6 @@ export class MountainsComponent implements OnInit {
         this.currentMountain = clickedRow;
     }
 
-    editStatus(eventData: {x: number, y: boolean}) {
-        this.editMountainStatus(eventData.x, eventData.y);
-    }
-
     turnOnEditMode(): void {
         this.showForm = true;
         this.btnText = "Cancel form"
@@ -101,6 +97,22 @@ export class MountainsComponent implements OnInit {
         this.btnIcon = "add"
     }
 
+    changeEditMountainMode(): void {
+        this.turnOffEditMode();
+        this.toggleAddFormVisibility();
+        this.editMountain();
+    }
+
+    // ==============================================================
+    // DATABASE ACCESS
+
+    getAllMountainsIds(): void {
+        this._mountainService.getMountainDataById(0)
+        .subscribe(data => {
+            this.mountains = data;
+        });
+    }
+
     addMountain(): void {
         this._mountainService.addMountainData(this.currentMountain)
             .subscribe(data => {
@@ -109,36 +121,42 @@ export class MountainsComponent implements OnInit {
 
         setTimeout(() => {
             this.listComponent.refresh();
-          }, 500)
+          }, 200)
     }
 
     editMountain(): void {
         this._mountainService.editMountainData(this.currentMountain)
-            .subscribe(console.log);
+            .subscribe();
+
+
+
+        setTimeout(() => {
+            this.updatePaginatorData({pageIndex: this.lastPageIndex,
+                pageSize: this.lastPageSize,
+                length: this.lastLength});
+        }, 100)
 
         setTimeout(() => {
             this.listComponent.refresh();
-          }, 500)
+          }, 100)
     }
 
-    editMountainStatus(x: number, y: boolean): void {
-        this._mountainService.editMountainStatusData(x, y)
-            .subscribe(console.log);
+    editMountainStatus(eventData: {x: number, y: boolean}): void {
+        this._mountainService.editMountainStatusData(eventData.x, eventData.y)
+            .subscribe();
 
         setTimeout(() => {
             this.listComponent.refresh();
-          }, 500)
-    }
-
-    changeEditMountainMode(): void {
-        this.turnOffEditMode();
-        this.toggleAddFormVisibility();
-        this.editMountain();
+          }, 200)
     }
 
     updatePaginatorData(eventData: {pageIndex: number, pageSize: number, length: number}): void {
         var start: number = eventData.pageIndex * eventData.pageSize + 1;
         var end: number = (eventData.pageIndex + 1) * eventData.pageSize;
+
+        this.lastPageIndex = eventData.pageIndex;
+        this.lastPageSize = eventData.pageSize;
+        this.lastLength = eventData.length;
 
         if (end > eventData.length) {
             end = eventData.length;
@@ -156,6 +174,6 @@ export class MountainsComponent implements OnInit {
                 this.mountains[index] = element;
             });
             this.listComponent.refresh();
-          }, 500)
+          }, 300)
     }
 }

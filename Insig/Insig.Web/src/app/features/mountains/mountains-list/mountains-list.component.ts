@@ -22,11 +22,10 @@ export class MountainsListComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.getPaginatorData({pageIndex: 0, pageSize: 5, length: 10} as PageEvent);
-    this.refresh();
   }
 
   refresh() {
-    console.log("REFRESH!");
+    //console.log("REFRESH!");
     this.dataSource.data = this.mountainsData;
     this.dataSource.paginator = this.paginator;
   }
@@ -46,7 +45,6 @@ export class MountainsListComponent implements AfterViewInit {
   }
 
   getPaginatorData(event: PageEvent) {
-    console.log(event);
     this.changePaginatorSettings.emit({pageIndex: event.pageIndex, pageSize: event.pageSize, length: event.length});
   }
 }
