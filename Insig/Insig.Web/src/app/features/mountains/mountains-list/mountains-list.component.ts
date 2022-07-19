@@ -12,7 +12,7 @@ import { MountainDto } from '../mountains.component';
 export class MountainsListComponent implements AfterViewInit {
     @Output() elementChosen: EventEmitter<MountainDto> = new EventEmitter();
     @Output() changeStatus: EventEmitter<{x: number, y: boolean}> = new EventEmitter();
-    @Output() changePaginatorSettings: EventEmitter<{pageIndex: number, pageSize: number}> = new EventEmitter();
+    @Output() changePaginatorSettings: EventEmitter<{pageIndex: number, pageSize: number, length: number}> = new EventEmitter();
     @Input() mountainsData: Observable<MountainDto[]>;
 
   displayedColumns: string[] = ['name', 'height', 'country', 'range', 'difficulty', 'distance', 'isDeleted', 'edit'];
@@ -47,6 +47,6 @@ export class MountainsListComponent implements AfterViewInit {
 
   getPaginatorData(event: PageEvent) {
     console.log(event);
-    this.changePaginatorSettings.emit({pageIndex: event.pageIndex, pageSize: event.pageSize});
+    this.changePaginatorSettings.emit({pageIndex: event.pageIndex, pageSize: event.pageSize, length: event.length});
   }
 }

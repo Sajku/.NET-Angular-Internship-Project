@@ -27,16 +27,15 @@ export interface MountainDto {
     styleUrls: ['./mountains.component.scss'],
 })
 export class MountainsComponent implements OnInit {
-    title = "312312123Mountains Collection";
+    title = "Mountains Collection";
     showForm: boolean = false;
-    btnText: string = "312312321dasAdd a new mountain";
+    btnText: string = "Add a new mountain";
     btnIcon: string = "add";
     editModeOfTheFormOn: boolean = false;
     subscription!: Subscription;
 
     mountains!: Observable<MountainDto[]>;
     currentMountain: MountainDto;
-
 
     @ViewChild(MountainsListComponent, { static: false })
     listComponent: MountainsListComponent;
@@ -112,7 +111,6 @@ export class MountainsComponent implements OnInit {
         this.subscription = this.mountains
         .subscribe();
 
-        this.getMountains();
         setTimeout(() => {
             this.listComponent.refresh();
           }, 500)
@@ -128,7 +126,6 @@ export class MountainsComponent implements OnInit {
         this.subscription = this.mountains
         .subscribe();
 
-        this.getMountains();
         setTimeout(() => {
             this.listComponent.refresh();
           }, 500)
@@ -143,7 +140,6 @@ export class MountainsComponent implements OnInit {
         this.subscription = this.mountains
         .subscribe();
 
-        this.getMountains();
         setTimeout(() => {
             this.listComponent.refresh();
           }, 500)
@@ -155,13 +151,20 @@ export class MountainsComponent implements OnInit {
         this.editMountain();
     }
 
-    updatePaginatorData(eventData: {pageIndex: number, pageSize: number}): void {
+    updatePaginatorData(eventData: {pageIndex: number, pageSize: number, length: number}): void {
         var start: number = eventData.pageIndex * eventData.pageSize + 1;
         var end: number = (eventData.pageIndex + 1) * eventData.pageSize;
-        var id = start;
-        while (id <= end) {
-            id++;
+
+        if (end > eventData.length) {
+            end = eventData.length;
         }
-        this._mountainService.getFewMountainData(id);
+
+        this.mountains = this._mountainService.getFewMountainData(start, end)
+            .pipe(
+                switchMapTo(this._mountainService.getMountainData())
+            );
+
+        this.subscription = this.mountains
+        .subscribe();
     }
 }

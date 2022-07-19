@@ -58,6 +58,15 @@ namespace Insig.Api.Controllers
             return Ok(result);
         }
 
+        [HttpGet("mountains/{start:int}-{end:int}")]
+        public async Task<IActionResult> GetMountains([FromQuery] MountainParameter parameter, int start, int end)
+        {
+            parameter.Start = start;
+            parameter.End = end;
+            List<MountainDTO> result = await _queryDispatcher.Dispatch(parameter);
+            return Ok(result);
+        }
+
         [HttpPost("mountains")]
         public async Task<IActionResult> AddMountains([FromBody] AddMountainCommand command)
         {

@@ -20,7 +20,7 @@ namespace Insig.Infrastructure.Queries
 
         public async Task<List<MountainDTO>> GetMountainData(MountainParameter query)
         {
-            if (query.Id == null)
+            if (query.Id == null && query.Start == null)
             {
                 return await _sqlQueryBuilder
                 .Select("*")
@@ -28,7 +28,7 @@ namespace Insig.Infrastructure.Queries
                 .BuildQuery<MountainDTO>()
                 .ExecuteToList();
             }
-            else
+            else if (query.Id != null)
             {
                 return await _sqlQueryBuilder
                 .Select("*")
@@ -37,8 +37,25 @@ namespace Insig.Infrastructure.Queries
                 .BuildQuery<MountainDTO>()
                 .ExecuteToList();
             }
-            
-        }
+            else
+            {
+                var mountains = await _sqlQueryBuilder
+                .Select("*")
+                .From("Mountain")
+                .BuildQuery<MountainDTO>()
+                .ExecuteToList();
 
+                List<MountainDTO> result = new List<MountainDTO>();
+                for (int i=(int)query.Start - 1; i<query.End; i++)
+                {
+                    if (mountains[i] != null)
+                    {
+                        result.Add(mountains[i]);
+                    }
+                }
+
+                return result;
+            }
+        }
     }
 }

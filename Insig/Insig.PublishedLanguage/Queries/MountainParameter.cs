@@ -7,5 +7,7 @@ namespace Insig.PublishedLanguage.Queries
     public class MountainParameter : IQuery<List<MountainDTO>>
     {
         public int ?Id { get; set; }
+        public int ?Start { get; set; }
+        public int ?End { get; set; }
     }
 }
