@@ -10,7 +10,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MountainsRoutingModule } from './mountains-routing.module';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 
 import { MountainsComponent } from './mountains.component';
@@ -35,6 +36,7 @@ import { MountainsListComponent } from './mountains-list/mountains-list.componen
         MatSlideToggleModule,
         MatInputModule,
         FormsModule,
+        ReactiveFormsModule,
         MountainsRoutingModule
     ]
 })

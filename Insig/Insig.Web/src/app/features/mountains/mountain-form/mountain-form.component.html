@@ -1,38 +1,57 @@
-<form class="example-form">
-    <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+<form class="example-form" [formGroup]="mountainDetailsForm">
+    <mat-progress-bar mode="determinate" value="{{progressBarValue}}"></mat-progress-bar>
     <table class="example-full-width" cellspacing="0">
     <tr>
       <td>
       <mat-form-field
+        (focusout)="updateProgressBar()"
         class="example-full-width"
         appearance="fill">
             <mat-label>Mountain Name</mat-label>
-            <input matInput
+            <input matInput required
                 [(ngModel)]="currentMountain.name"
-                [ngModelOptions]="{standalone: true}">
-            <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                Please enter a valid email address
-            </mat-error> -->
+                formControlName="name"
+                maxlength="30">
+                <mat-error *ngFor="let validation of validation_messages.name">
+                    <mat-error class="error-message"
+                        *ngIf="mountainDetailsForm.get('name')?.hasError(validation.type)
+                        && (mountainDetailsForm.get('name')?.dirty
+                        || mountainDetailsForm.get('name')?.touched)">
+                        {{validation.message}}
+                    </mat-error>
+                </mat-error>
       </mat-form-field>
       </td>
       <td>
       <mat-form-field
+        (focusout)="updateProgressBar()"
         class="example-full-width"
         appearance="fill">
             <mat-label>Mountain Height [m]</mat-label>
             <input matInput
                     [(ngModel)]="currentMountain.height"
-                    [ngModelOptions]="{standalone: true}"
-                    type="number" max="8849" min="1">
+                    formControlName="height"
+                    type="number" max="8849" min="1"
+                    oninput="this.value=this.value.slice(0,this.maxLength)"
+                    maxlength="4">
+            <mat-error *ngFor="let validation of validation_messages.height">
+                <mat-error class="error-message"
+                    *ngIf="mountainDetailsForm.get('height')?.hasError(validation.type)
+                    && (mountainDetailsForm.get('height')?.dirty
+                    || mountainDetailsForm.get('height')?.touched)">
+                    {{validation.message}}
+                </mat-error>
+            </mat-error>
       </mat-form-field>
       </td>
       <td class="last-td">
       <mat-form-field
+        (focusout)="updateProgressBar()"
         class="example-full-width"
         appearance="fill">
             <mat-label>Difficulty</mat-label>
             <mat-select [(ngModel)]="currentMountain.difficulty"
-                        [ngModelOptions]="{standalone: true}">
+                        formControlName="difficulty">
             <mat-option value="Family Friendly">Family Friendly</mat-option>
             <mat-option value="Easy">Easy</mat-option>
             <mat-option value="Medium">Medium</mat-option>
@@ -40,6 +59,14 @@
             <mat-option value="Extreme">Extreme</mat-option>
             <mat-option value="You can die!">You can die!</mat-option>
             </mat-select>
+            <mat-error *ngFor="let validation of validation_messages.difficulty">
+                <mat-error class="error-message"
+                    *ngIf="mountainDetailsForm.get('difficulty')?.hasError(validation.type)
+                    && (mountainDetailsForm.get('difficulty')?.dirty
+                    || mountainDetailsForm.get('difficulty')?.touched)">
+                    {{validation.message}}
+                </mat-error>
+            </mat-error>
       </mat-form-field>
       </td>
     </tr>
@@ -47,38 +74,65 @@
     <tr>
         <td>
         <mat-form-field
+          (focusout)="updateProgressBar()"
           class="example-full-width"
           appearance="fill">
               <mat-label>Country</mat-label>
               <textarea matInput
                         placeholder="Ex. Poland"
                         [(ngModel)]="currentMountain.country"
-                        [ngModelOptions]="{standalone: true}">
+                        formControlName="country">
               </textarea>
+              <mat-error *ngFor="let validation of validation_messages.country">
+                <mat-error class="error-message"
+                    *ngIf="mountainDetailsForm.get('country')?.hasError(validation.type)
+                    && (mountainDetailsForm.get('country')?.dirty
+                    || mountainDetailsForm.get('country')?.touched)">
+                    {{validation.message}}
+                </mat-error>
+            </mat-error>
         </mat-form-field>
         </td>
         <td>
         <mat-form-field
+          (focusout)="updateProgressBar()"
           class="example-full-width"
           appearance="fill">
               <mat-label>Mountain Range</mat-label>
               <textarea matInput
                         placeholder="Ex. The Sudetes"
                         [(ngModel)]="currentMountain.range"
-                        [ngModelOptions]="{standalone: true}">
+                        formControlName="range">
               </textarea>
+              <mat-error *ngFor="let validation of validation_messages.range">
+                <mat-error class="error-message"
+                    *ngIf="mountainDetailsForm.get('range')?.hasError(validation.type)
+                    && (mountainDetailsForm.get('range')?.dirty
+                    || mountainDetailsForm.get('range')?.touched)">
+                    {{validation.message}}
+                </mat-error>
+            </mat-error>
         </mat-form-field>
         </td>
         <td class="last-td">
             <mat-form-field
+              (focusout)="updateProgressBar()"
               class="example-full-width"
               appearance="fill">
                   <mat-label>National Park</mat-label>
                   <textarea matInput
                             placeholder="Ex. Tatry National Park"
                             [(ngModel)]="currentMountain.park"
-                            [ngModelOptions]="{standalone: true}">
+                            formControlName="park">
                   </textarea>
+                  <mat-error *ngFor="let validation of validation_messages.park">
+                    <mat-error class="error-message"
+                        *ngIf="mountainDetailsForm.get('park')?.hasError(validation.type)
+                        && (mountainDetailsForm.get('park')?.dirty
+                        || mountainDetailsForm.get('park')?.touched)">
+                        {{validation.message}}
+                    </mat-error>
+                </mat-error>
             </mat-form-field>
         </td>
     </tr>
@@ -86,33 +140,52 @@
     <tr>
         <td>
         <mat-form-field
+          (focusout)="updateProgressBar()"
           class="example-full-width"
           appearance="fill">
               <mat-label>Name Of The Nearest Mountain Shelter</mat-label>
               <input matInput
                     [(ngModel)]="currentMountain.shelter"
-                    [ngModelOptions]="{standalone: true}">
+                    formControlName="shelter">
+                <mat-error *ngFor="let validation of validation_messages.shelter">
+                    <mat-error class="error-message"
+                        *ngIf="mountainDetailsForm.get('shelter')?.hasError(validation.type)
+                        && (mountainDetailsForm.get('shelter')?.dirty
+                        || mountainDetailsForm.get('shelter')?.touched)">
+                        {{validation.message}}
+                    </mat-error>
+                </mat-error>
         </mat-form-field>
         </td>
         <td>
         <mat-form-field
+          (focusout)="updateProgressBar()"
           class="example-full-width"
           appearance="fill">
               <mat-label>Distance to the Nearest Shelter [km]</mat-label>
               <input matInput
                     [(ngModel)]="currentMountain.shelterDistance"
-                    [ngModelOptions]="{standalone: true}"
+                    formControlName="shelterDistance"
                     type="number">
+                <mat-error *ngFor="let validation of validation_messages.shelterDistance">
+                    <mat-error class="error-message"
+                        *ngIf="mountainDetailsForm.get('shelterDistance')?.hasError(validation.type)
+                        && (mountainDetailsForm.get('shelterDistance')?.dirty
+                        || mountainDetailsForm.get('shelterDistance')?.touched)">
+                        {{validation.message}}
+                    </mat-error>
+                </mat-error>
         </mat-form-field>
         </td>
         <td  class="last-td">
             <mat-form-field
+              (focusout)="updateProgressBar()"
               class="example-full-width"
               appearance="fill">
                   <mat-label>Quality Of Food in Shelter</mat-label>
                   <mat-select
                             [(ngModel)]="currentMountain.foodQuality"
-                            [ngModelOptions]="{standalone: true}">
+                            formControlName="foodQuality">
                     <mat-option value="Food Not Available">Food Not Available</mat-option>
                     <mat-option value="Awful">Awful</mat-option>
                     <mat-option value="Bad">Bad</mat-option>
@@ -120,6 +193,14 @@
                     <mat-option value="Good">Good</mat-option>
                     <mat-option value="Delicious">Delicious</mat-option>
                 </mat-select>
+                <mat-error *ngFor="let validation of validation_messages.foodQuality">
+                    <mat-error class="error-message"
+                        *ngIf="mountainDetailsForm.get('foodQuality')?.hasError(validation.type)
+                        && (mountainDetailsForm.get('foodQuality')?.dirty
+                        || mountainDetailsForm.get('foodQuality')?.touched)">
+                        {{validation.message}}
+                    </mat-error>
+                </mat-error>
             </mat-form-field>
         </td>
     </tr>
@@ -166,6 +247,7 @@
     </section>
 
     <button mat-raised-button
+            [disabled]="!mountainDetailsForm.valid"
             type="button"
             class="btn"
             color="{{ editModeOn ? 'accent' : 'primary' }}"
