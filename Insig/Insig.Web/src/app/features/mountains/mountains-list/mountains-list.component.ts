@@ -21,8 +21,7 @@ export class MountainsListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngAfterViewInit() {
-    this.getPaginatorData({pageIndex: 0, pageSize: 5, length: 10} as PageEvent);
-  }
+    }
 
   refresh() {
     //console.log("REFRESH!");

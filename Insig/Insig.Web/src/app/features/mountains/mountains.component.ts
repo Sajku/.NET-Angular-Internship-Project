@@ -159,7 +159,7 @@ export class MountainsComponent implements OnInit {
                 });
                 setTimeout(() => {
                     this.listComponent.refresh();
-                },500)
+                },100)
             })
     }
 }

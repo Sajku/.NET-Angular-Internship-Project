@@ -8,7 +8,7 @@
 
     <ng-container matColumnDef="height">
         <th mat-header-cell *matHeaderCellDef> Height </th>
-        <td mat-cell *matCellDef="let element">  {{ element.height !== 0 ? element.height : ""}}  </td>
+        <td mat-cell *matCellDef="let element">  {{ element.height !== 0 ? element.height : "-"}}  </td>
     </ng-container>
 
     <ng-container matColumnDef="country">
@@ -28,7 +28,7 @@
 
     <ng-container matColumnDef="distance">
         <th mat-header-cell *matHeaderCellDef> Distance To Shelter </th>
-        <td mat-cell *matCellDef="let element"> {{ element.shelterDistance !== 0 ? element.shelterDistance : ""}} </td>
+        <td mat-cell *matCellDef="let element"> {{ element.shelterDistance !== 0 ? element.shelterDistance : "-"}} </td>
     </ng-container>
 
     <ng-container matColumnDef="isDeleted">
