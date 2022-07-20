@@ -1,4 +1,21 @@
-<div class="mat-elevation-z8">
+<div class="mat-elevation-z8 container">
+
+    <mat-toolbar>
+        <button mat-raised-button
+                (click)="loadAllData()"
+                [disabled]="filterBtnOff">
+            Filters
+        </button>
+
+        <mat-form-field appearance="standard" *ngIf="filterBtnOff">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)"
+                   placeholder="Ex. Mount"
+                   #input>
+        </mat-form-field>
+
+    </mat-toolbar>
+
     <table mat-table [dataSource]="dataSource">
 
     <ng-container matColumnDef="name">

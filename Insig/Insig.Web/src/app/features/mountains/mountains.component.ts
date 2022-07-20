@@ -107,11 +107,18 @@ export class MountainsComponent implements OnInit {
     // ==============================================================
     // DATABASE ACCESS
 
+    getMountains(): void {
+        this._mountainService.getMountainData()
+            .subscribe(data => {
+                this.mountains = data;
+            });
+    }
+
     getAllMountainsIds(): void {
         this._mountainService.getMountainDataById(0)
-        .subscribe(data => {
-            this.mountains = data;
-        });
+            .subscribe(data => {
+                this.mountains = data;
+            });
     }
 
     addMountain(): void {

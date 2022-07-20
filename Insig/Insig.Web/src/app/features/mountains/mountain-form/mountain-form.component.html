@@ -31,9 +31,8 @@
             <input matInput
                     [(ngModel)]="currentMountain.height"
                     formControlName="height"
-                    type="number" max="8849" min="1"
-                    oninput="this.value=this.value.slice(0,this.maxLength)"
-                    maxlength="4">
+                    type="number"
+                    oninput="this.value=this.value.slice(0,4)">
             <mat-error *ngFor="let validation of validation_messages.height">
                 <mat-error class="error-message"
                     *ngIf="mountainDetailsForm.get('height')?.hasError(validation.type)

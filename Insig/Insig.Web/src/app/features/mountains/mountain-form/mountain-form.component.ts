@@ -39,6 +39,7 @@ export class MountainFormComponent implements OnInit {
             ])],
         height: ["", Validators.compose([
             Validators.required,
+            Validators.min(1),
             Validators.max(8849)
             ])],
         difficulty: ["", Validators.required],
@@ -73,6 +74,7 @@ export class MountainFormComponent implements OnInit {
     ],
     'height': [
         { type: 'required', message: 'Height is required' },
+        { type: 'min', message: 'You know it\'s not possible' },
         { type: 'max', message: 'There is no such high mountain' }
     ],
     'difficulty': [
