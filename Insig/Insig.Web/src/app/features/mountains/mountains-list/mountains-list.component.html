@@ -86,4 +86,14 @@
         aria-label="Select page of periodic elements">
     </mat-paginator>
 
+
+    Typeahead:
+
+    <ng-select [items]="cars"
+           bindLabel="name"
+           bindValue="id"
+           [(ngModel)]="selectedCar"
+           style="width: 25%;">
+    </ng-select>
+
 </div>

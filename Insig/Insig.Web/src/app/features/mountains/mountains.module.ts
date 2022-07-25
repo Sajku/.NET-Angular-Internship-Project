@@ -11,7 +11,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MountainsRoutingModule } from './mountains-routing.module';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 import { MountainsComponent } from './mountains.component';
@@ -37,6 +37,7 @@ import { MountainsListComponent } from './mountains-list/mountains-list.componen
         MatInputModule,
         FormsModule,
         ReactiveFormsModule,
+        NgSelectModule,
         MountainsRoutingModule
     ]
 })

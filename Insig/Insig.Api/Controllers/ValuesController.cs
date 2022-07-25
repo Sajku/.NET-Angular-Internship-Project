@@ -43,6 +43,7 @@ namespace Insig.Api.Controllers
             return Ok();
         }
 
+        [AllowAnonymous]
         [HttpGet("mountains")]
         public async Task<IActionResult> GetMountains([FromQuery] MountainParameter parameter)
         {
@@ -50,6 +51,7 @@ namespace Insig.Api.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("mountains/{id:int}")]
         public async Task<IActionResult> GetMountains([FromQuery] MountainParameter parameter, int id)
         {
@@ -57,7 +59,8 @@ namespace Insig.Api.Controllers
             List<MountainDTO> result = await _queryDispatcher.Dispatch(parameter);
             return Ok(result);
         }
-
+        
+        [AllowAnonymous]
         [HttpGet("mountains/{start:int}-{end:int}")]
         public async Task<IActionResult> GetMountains([FromQuery] MountainParameter parameter, int start, int end)
         {
@@ -67,6 +70,7 @@ namespace Insig.Api.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpPost("mountains")]
         public async Task<IActionResult> AddMountains([FromBody] AddMountainCommand command)
         {
@@ -74,6 +78,7 @@ namespace Insig.Api.Controllers
             return Ok();
         }
 
+        [AllowAnonymous]
         [HttpPut("mountains")]
         public async Task<IActionResult> EditMountains([FromBody] EditMountainCommand command)
         {
@@ -81,6 +86,7 @@ namespace Insig.Api.Controllers
             return Ok();
         }
 
+        [AllowAnonymous]
         [HttpPatch("mountains")]
         public async Task<IActionResult> EditMountainsStatus([FromBody] EditMountainStatusCommand command)
         {

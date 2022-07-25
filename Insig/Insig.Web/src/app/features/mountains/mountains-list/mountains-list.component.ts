@@ -64,4 +64,17 @@ export class MountainsListComponent implements AfterViewInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  // TYPEAHEAD - NG-SELECT TRYOUT
+
+  selectedCar: number;
+
+  cars = [
+    { id: 1, name: 'Volvo' },
+    { id: 2, name: 'Saab' },
+    { id: 3, name: 'Opel' },
+    { id: 4, name: 'Audi' },
+];
+
+
 }
